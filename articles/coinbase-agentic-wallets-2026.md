@@ -12,7 +12,11 @@ published: false
 
 これは、AIエージェントが人間の介入なしに暗号資産を「保有し、送金し、取引する」ためのウォレット基盤です。
 
-「AIがお金を扱う」と聞くとSFっぽく聞こえるかもしれませんが、すでにx402プロトコルは5,000万件以上のトランザクションを処理しており、これは現実に動き始めている技術です。
+CoinbaseのCEO Brian Armstrong氏もこうポストしています。
+
+https://x.com/brian_armstrong/status/1889024753651745139
+
+「AIがお金を扱う」と聞くとSFっぽく聞こえるかもしれませんが、すでにx402プロトコルは5,000万件以上のトランザクションを処理しています。これは現実に動き始めている技術です。
 
 この記事では、Agentic Walletsの仕組みと背景、そしてエンジニアとして「これが何を意味するのか」を整理してみます。
 
@@ -30,15 +34,33 @@ AIエージェントの進化は目覚ましいですよね。コードを書く
 
 **AIは「お金を動かす」ことができなかった。**
 
-例えば、AIエージェントにこんなことを頼みたいとします：
+AIエージェントに「APIの利用料を自動で支払ってほしい」「DeFiで運用してほしい」と頼みたくても、従来のエージェントには財布がありません。毎回人間が承認するか、事前に資金をデポジットしておく必要がありました。
 
-- APIの利用料を自動で支払ってほしい
-- DeFiで最適なイールドファーミングを実行してほしい
-- クロスチェーンで資産を移動してほしい
+以下の図を見てください。従来のAIエージェントと、Agentic Wallets導入後の違いです。
 
-これらはすべて「支払い」を伴います。でも従来のAIエージェントには財布がなかったので、毎回人間が承認するか、事前に資金をデポジットしておく必要がありました。
+```mermaid
+graph LR
+    subgraph 従来
+        A[AIエージェント] -->|リクエスト| B[外部API]
+        B -->|402 支払い必要| A
+        A -->|承認依頼| C[👤 人間]
+        C -->|承認| A
+        A -->|支払い| B
+    end
+```
 
-Agentic Walletsは、この「AIエージェントに財布を持たせる」という課題を解決するインフラです。
+```mermaid
+graph LR
+    subgraph Agentic Wallets導入後
+        D[AIエージェント] -->|リクエスト| E[外部API]
+        E -->|402 支払い必要| D
+        D -->|自動支払い| F[🔐 Agentic Wallet]
+        F -->|トランザクション| G[⛓️ ブロックチェーン]
+        G -->|確認| E
+    end
+```
+
+人間のボトルネックがなくなり、エージェントが自律的に動けるようになります。
 
 ## Agentic Walletsの全体像
 
@@ -54,70 +76,92 @@ Agentic Walletsは、Coinbase Developer Platform（CDP）上に構築されたAI
 | **プログラマブルな支出制限** | エージェントの支出に上限を設定できる |
 | **x402プロトコル対応** | HTTPリクエストに支払いを組み込むプロトコルとネイティブ統合 |
 
-### AgentKitとの関係
+### AgentKitの中での位置づけ
 
 Agentic Walletsは、Coinbaseが2024年11月に公開した **AgentKit** フレームワークの拡張です。
 
-AgentKitはAIエージェントがブロックチェーンと対話するためのツールキットで、以下のような構成になっています：
+全体の構成を図で見てみましょう。
 
-```
-AgentKit（ツールキット）
-├── Wallet Provider（ウォレット管理）
-│   ├── CDP Wallet Provider ← Agentic Walletsはここ
-│   ├── EVM Wallet Provider
-│   └── Smart Wallet Provider
-├── Actions（オンチェーン操作）
-│   ├── 送金
-│   ├── スワップ
-│   ├── デプロイ
-│   └── etc.
-└── AI Framework Integration
-    ├── LangChain
-    ├── Vercel AI SDK
-    └── etc.
+```mermaid
+graph TB
+    AK[AgentKit] --> WP[Wallet Provider]
+    AK --> AC[Actions]
+    AK --> AI[AI Framework Integration]
+    
+    WP --> CDP["CDP Wallet Provider<br/>（← Agentic Walletsはここ）"]
+    WP --> EVM[EVM Wallet Provider]
+    WP --> SW[Smart Wallet Provider]
+    
+    AC --> TX[送金]
+    AC --> SWAP[スワップ]
+    AC --> DEP[コントラクトデプロイ]
+    AC --> STAKE[ステーキング]
+    
+    AI --> LC[LangChain]
+    AI --> VER[Vercel AI SDK]
+    AI --> MCP2[Model Context Protocol]
+    
+    style CDP fill:#e8f4fd,stroke:#1a73e8,stroke-width:2px
 ```
 
-つまり、AgentKitが「AIエージェントにブロックチェーンの手足を与える」フレームワークで、Agentic Walletsはその中の「財布」部分を担当しています。
+AgentKitが「AIエージェントにブロックチェーンの手足を与える」フレームワークで、Agentic Walletsはその中の「財布」を担当しています。
 
 ## x402プロトコルとは
 
 Agentic Walletsを理解する上で欠かせないのが **x402プロトコル** です。
 
-x402は、HTTPリクエストに「支払い」を組み込むプロトコルです。名前の由来はHTTPステータスコードの `402 Payment Required` から来ています。
+名前の由来はHTTPステータスコードの `402 Payment Required`。HTTPリクエストに「支払い」を組み込むプロトコルです。
 
-簡単に言うと：
+```mermaid
+sequenceDiagram
+    participant Agent as 🤖 AIエージェント
+    participant API as 🌐 APIサーバー
+    participant Wallet as 🔐 Agentic Wallet
+    participant Chain as ⛓️ Base
 
-1. AIエージェントがAPIにリクエストを送る
-2. サーバーが「402: 支払いが必要です」と返す
-3. エージェントが自動で支払いを実行（Agentic Wallet経由）
-4. サーバーが支払いを確認してレスポンスを返す
+    Agent->>API: 1. APIリクエスト
+    API-->>Agent: 2. 402 Payment Required（金額・宛先を通知）
+    Agent->>Wallet: 3. 支払い指示
+    Wallet->>Chain: 4. オンチェーン送金（USDC等）
+    Chain-->>API: 5. 支払い確認
+    API-->>Agent: 6. レスポンス返却
+```
 
 この一連の流れが、人間の介入なしに完結します。
 
-x402は2026年2月時点で **5,000万件以上のトランザクション** を処理しており、Stripeとの連携も進んでいます。
+x402は2026年2月時点で **5,000万件以上のトランザクション** を処理しており、決済大手のStripeとの連携も進んでいます。
 
 :::message
-実は以前、x402をPolygon MainnetのJPYCで動かす検証記事を書きました。Facilitatorの実装方法に興味がある方はぜひ👇
+以前、x402をPolygon MainnetのJPYCで動かす検証記事を書きました。Facilitatorの実装方法に興味がある方はぜひ👇
 https://zenn.dev/komlock_lab/articles/d4cc55a2ecf543
 :::
 
 ## カストディアル vs ノンカストディアル
 
-Agentic Walletsを評価する上で重要な視点が、**カストディ（秘密鍵の管理方法）** です。
+Agentic Walletsを評価する上で避けて通れないのが、**カストディ（秘密鍵の管理方法）** の問題です。
+
+```mermaid
+graph TB
+    subgraph カストディアル
+        direction TB
+        U1[開発者] -->|APIで操作| C1[Coinbase KMS]
+        C1 -->|鍵管理| K1[🔑 秘密鍵]
+    end
+    
+    subgraph ノンカストディアル
+        direction TB
+        U2[開発者] -->|直接管理| K2[🔑 秘密鍵]
+        SC[スマートコントラクト] -->|権限制御| K2
+    end
+```
 
 ### Coinbase Agentic Wallets（カストディアル）
 
-- CoinbaseのKMSが秘密鍵を管理
-- 開発者は鍵管理を気にしなくていい
-- Coinbaseへの信頼が前提
-- コンプライアンス・KYCフックが組み込み済み
+CoinbaseのKMSが秘密鍵を管理するモデルです。開発者は鍵管理を気にしなくていい反面、Coinbaseへの信頼が前提になります。コンプライアンス・KYCフックが組み込み済みなので、エンタープライズ用途に強いです。
 
 ### ノンカストディアル（例：Agent Wallet SDK）
 
-- スマートコントラクトで権限を管理（ERC-6551 + ERC-4337）
-- 秘密鍵は第三者に預けない
-- 支出制限がオンチェーンで強制される
-- インフラへの依存がない
+スマートコントラクトで権限を管理するモデル（ERC-6551 + ERC-4337）です。秘密鍵は第三者に預けず、支出制限もオンチェーンで強制されます。Coinbaseに依存しない代わりに、セットアップの手間がかかります。
 
 | 観点 | Coinbase Agentic Wallets | ノンカストディアル |
 | --- | --- | --- |
@@ -127,27 +171,36 @@ Agentic Walletsを評価する上で重要な視点が、**カストディ（秘
 | カスタマイズ性 | CDP内で制限あり | 自由度高い |
 | エンタープライズ対応 | 強い | これから |
 
-どちらが優れているという話ではなく、ユースケースによって使い分けるべきだと思います。
-
-素早くプロトタイプを作りたいならCoinbase、自己主権を重視するならノンカストディアルが適しています。
+どちらが優れているという話ではなく、ユースケースによって使い分けるべきだと思います。素早くプロトタイプを作りたいならCoinbase、自己主権を重視するならノンカストディアルが適しています。
 
 ## これが意味すること
 
 Agentic Walletsの登場は、単に「AIエージェントがお金を使えるようになった」という話ではないと思っています。
 
-### 1. エージェント経済圏の本格始動
+### エージェント経済圏の本格始動
 
 AIエージェント同士がサービスを提供し合い、自律的に決済する世界。これがようやく技術的に可能になりました。
 
-### 2. 「API課金」の再定義
+```mermaid
+graph LR
+    A1[🤖 エージェントA<br/>データ分析] -->|USDCで支払い| A2[🤖 エージェントB<br/>API提供]
+    A2 -->|USDCで支払い| A3[🤖 エージェントC<br/>ストレージ]
+    A3 -->|USDCで支払い| A1
+    
+    A1 -.->|全てAgentic Wallet経由| W[⛓️ Base]
+    A2 -.-> W
+    A3 -.-> W
+```
+
+### 「API課金」の再定義
 
 x402によって、従来のAPIキー＋月額課金モデルから「リクエストごとのマイクロペイメント」に移行する可能性があります。これはAIエージェントとの相性が非常に良い。
 
-### 3. セキュリティの新しい課題
+### セキュリティの新しい課題
 
-AIエージェントが自律的にお金を動かすということは、そのエージェントがハッキングされた場合のリスクも大きいということです。BDICが「AgentCover Pro」というAIエージェント向け保険を発表したのも、この文脈です。
+AIエージェントが自律的にお金を動かすということは、そのエージェントがハッキングされた場合のリスクも大きいということです。実際、BDICが「AgentCover Pro」というAIエージェント向け保険を発表しています。エージェント経済圏には、新しいリスク管理レイヤーが必要です。
 
-### 4. ブロックチェーンの存在意義が明確に
+### ブロックチェーンの存在意義が明確に
 
 AIエージェント間の取引において、「信頼できる第三者なしに価値を移転できる」ブロックチェーンの特性は、まさに本質的な価値を発揮します。銀行口座を持てないAIエージェントにとって、ブロックチェーンは唯一の金融インフラです。
 
