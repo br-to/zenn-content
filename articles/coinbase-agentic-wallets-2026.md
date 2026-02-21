@@ -14,7 +14,7 @@ published: false
 
 CoinbaseのCEO Brian Armstrong氏もこうポストしています。
 
-https://x.com/brian_armstrong/status/1889024753651745139
+https://x.com/brian_armstrong/status/2021661132734288131
 
 「AIがお金を扱う」と聞くとSFっぽく聞こえるかもしれませんが、すでにx402プロトコルは5,000万件以上のトランザクションを処理しています。これは現実に動き始めている技術です。
 
