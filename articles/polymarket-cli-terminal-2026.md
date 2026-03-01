@@ -58,7 +58,7 @@ chmod +x polymarket
 sudo mv polymarket /usr/local/bin/
 ```
 
-ただし、このバイナリはGLIBC 2.38以上を要求します。Ubuntu 24.04やFedora 39以降なら問題ありませんが、Debian 12（GLIBC 2.36）やそれ以前の環境では以下のエラーが出ます。
+ただし、このバイナリは比較的新しいGLIBC（2.38以上）を要求します。Ubuntu 24.04やFedora 39以降なら問題ありませんが、Debian 12（GLIBC 2.36）などの安定版ディストリビューションでは以下のエラーが出ます。
 
 ```
 ./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
