@@ -360,19 +360,6 @@ if (alerts.length) {
 ![AIエージェントによるオッズ変動アラートの例](/images/polymarket-alert-discord.jpg)
 *AIエージェントが自動で検知・分析した結果をDiscordに通知している例*
 
-```
-🚨 オッズ急変動検知!
-
-📉 OpenAI IPO closing market cap above $1.6T?
-   36.0% → 22.5% (-13.5%)
-
-📈 Will Anthropic have the best AI model at the end of March 2026?
-   54.4% → 63.0% (+8.6%)
-
-📈 Fed rate cut by July 2026 meeting?
-   81.5% → 89.0% (+7.5%)
-```
-
 オッズが急変動している = 何か大きなニュースや材料が出たサイン。ニュースサイトをチェックするより先に、市場の変化に気づけることがあります。
 
 ## もともとWebアプリを作っていた
