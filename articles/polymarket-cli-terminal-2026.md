@@ -1,5 +1,5 @@
 ---
-title: "Polymarket CLIで予測市場のデータをターミナルから取得する"
+title: "予測市場のオッズはニュースより速い？Polymarket CLIで変動監視を作った話"
 emoji: "🔮"
 type: "tech"
 topics: ["polymarket", "cli", "blockchain", "ai", "予測市場"]
