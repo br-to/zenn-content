@@ -2,7 +2,7 @@
 title: "Polymarket CLIで予測市場のデータをターミナルから取得する"
 emoji: "🔮"
 type: "tech"
-topics: ["polymarket", "cli", "blockchain", "rust", "予測市場"]
+topics: ["polymarket", "cli", "blockchain", "ai", "予測市場"]
 published: false
 ---
 
