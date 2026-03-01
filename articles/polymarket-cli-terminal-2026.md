@@ -357,6 +357,9 @@ if (alerts.length) {
 
 実際に運用してみると、こんな感じでアラートが出ます。
 
+![AIエージェントによるオッズ変動アラートの例](/images/polymarket-alert-discord.jpg)
+*AIエージェントが自動で検知・分析した結果をDiscordに通知している例*
+
 ```
 🚨 オッズ急変動検知!
 
