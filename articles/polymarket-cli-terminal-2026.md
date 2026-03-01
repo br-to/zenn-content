@@ -51,28 +51,26 @@ https://github.com/polymarket/polymarket-cli
 
 ## インストール
 
-### 方法1: pre-builtバイナリ（推奨環境のみ）
+### 方法1: Homebrew（macOS / Linux）
 
-GitHubのReleasesページからバイナリをダウンロードできます。
+一番簡単な方法です。
 
 ```bash
-# Linux x86_64の場合
-curl -L https://github.com/polymarket/polymarket-cli/releases/latest/download/polymarket-linux-amd64 -o polymarket
-chmod +x polymarket
-sudo mv polymarket /usr/local/bin/
+brew tap Polymarket/polymarket-cli https://github.com/Polymarket/polymarket-cli
+brew install polymarket
 ```
 
-ただし、このバイナリは比較的新しいGLIBC（2.38以上）を要求します。Ubuntu 24.04やFedora 39以降なら問題ありませんが、Debian 12（GLIBC 2.36）などの安定版ディストリビューションでは以下のエラーが出ます。
+### 方法2: シェルスクリプト
 
+Homebrewを使っていない環境向け。
+
+```bash
+curl -sSL https://raw.githubusercontent.com/Polymarket/polymarket-cli/main/install.sh | sh
 ```
-./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
-```
 
-macOSの場合はpre-builtバイナリがそのまま動きます。このGLIBC問題はLinux（特にクラウドVMの最小構成）特有のハマりどころです。
+### 方法3: ソースからビルド
 
-### 方法2: ソースからビルド（確実）
-
-GLIBC問題を回避するには、ソースからビルドします。
+上の方法でうまくいかない場合や、最新のmainブランチを使いたい場合はソースビルドします。
 
 ```bash
 # Rustのインストール（未インストールの場合）
@@ -80,23 +78,32 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
 # ソースからビルド
-git clone https://github.com/polymarket/polymarket-cli.git
+git clone https://github.com/Polymarket/polymarket-cli.git
 cd polymarket-cli
-cargo build --release
+cargo install --path .
 ```
 
-ビルドには数分かかります。完了したらパスを通します。
+`cargo install` でパスが通ります。ビルドには数分かかります。
+
+### GLIBC問題（Linux VPS向けの注意）
+
+pre-builtバイナリを直接ダウンロードした場合、比較的新しいGLIBC（2.38以上）を要求することがあります。Debian 12（GLIBC 2.36）などの安定版ディストリビューションでは以下のエラーが出ます。
+
+```
+./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
+```
+
+macOSなら問題ありません。Linux VMで遭遇した場合は、Homebrewかソースビルドで回避できます。
+
+### 動作確認
 
 ```bash
-sudo cp target/release/polymarket /usr/local/bin/
 polymarket --version
 ```
 
 ```
 polymarket 0.1.4
 ```
-
-ビルドに必要なディスク容量は約1GBです。CIやDockerで使う場合はマルチステージビルドで最終イメージを小さくするとよいでしょう。
 
 ## 市場を検索する
 
@@ -251,10 +258,6 @@ CLIはAIエージェントと非常に相性が良いです。ブラウザ操作
 JSON出力をNode.jsのスクリプトに渡して、オッズの推移グラフを作ったり、複数市場の相関分析を行ったりできます。学術研究やレポート作成にも使えます。
 
 ## ハマりどころ
-
-### GLIBC互換性（再掲）
-
-前述の通り、pre-builtバイナリはGLIBC 2.38以上が必要です。VPSやCI環境ではOSのバージョンに注意してください。ソースビルドで回避できます。
 
 ### 市場のslugとconditionIdとtokenId
 
