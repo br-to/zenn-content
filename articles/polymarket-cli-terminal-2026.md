@@ -129,7 +129,7 @@ polymarket markets search "Bitcoin" --limit 5
 
 各カラムはこんな意味です。
 
-- **Price (Yes)** - Yes側のオッズ。これがそのまま市場が予測する確率を表します。50¢ = 50%、99¢ = 99%
+- **Price (Yes)** - Yes側のオッズ。これがそのまま市場が予測する確率を表します。50¢ = 50%、99¢ = 99%。上の例では0.05¢（= 0.05%）なので、2月中にBTCが$150Kに到達する確率はほぼゼロと市場は見ています
 - **Volume** - 累計取引量（USDC建て）。市場の注目度の指標
 - **Liquidity** - 現在の流動性。高いほど大きなサイズの注文が通りやすい
 - **Status** - Active（取引中）/ Closed（終了）
@@ -178,7 +178,16 @@ Polymarketの裏側にはCLOB（Central Limit Order Book）があります。株
 polymarket clob book <TOKEN_ID>
 ```
 
-TOKEN_IDは市場検索のJSON出力から取得できます。各市場にはYes/Noそれぞれのトークンがあり、`clobTokenIds` フィールドに格納されています。
+TOKEN_IDは市場検索のJSON出力（`-o json`）に含まれる `clobTokenIds` フィールドから取得します。配列の1番目がYesトークン、2番目がNoトークンです。
+
+```bash
+# まずJSON出力でTOKEN_IDを確認
+polymarket -o json markets search "Bitcoin" --limit 1 | jq '.[0].clobTokenIds'
+# → ["12345...", "67890..."]  (1番目=Yes, 2番目=No)
+
+# YesトークンのオーダーブックI
+polymarket clob book 12345...
+```
 
 ```
 Market: 0xbb57ccf5...
@@ -283,7 +292,6 @@ CLIのJSON出力をNode.jsで処理すれば、オッズの変動監視ができ
 const { execSync } = require("child_process");
 const fs = require("fs");
 
-const CLI_PATH = "/usr/local/bin/polymarket";
 const HISTORY_FILE = "odds_history.json";
 const THRESHOLD = 5.0; // 5%以上の変動でアラート
 
@@ -291,7 +299,7 @@ const WATCH_QUERIES = ["Bitcoin", "Ethereum", "Fed rate", "OpenAI", "AI"];
 
 function searchMarkets(query, limit = 3) {
   const stdout = execSync(
-    `${CLI_PATH} markets search "${query}" --limit ${limit} -o json`,
+    `polymarket markets search "${query}" --limit ${limit} -o json`,
     { timeout: 15000, encoding: "utf-8" }
   );
   return JSON.parse(stdout);
