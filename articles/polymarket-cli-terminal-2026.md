@@ -64,6 +64,8 @@ sudo mv polymarket /usr/local/bin/
 ./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
 ```
 
+macOSの場合はpre-builtバイナリがそのまま動きます。このGLIBC問題はLinux（特にクラウドVMの最小構成）特有のハマりどころです。
+
 ### 方法2: ソースからビルド（確実）
 
 GLIBC問題を回避するには、ソースからビルドします。
