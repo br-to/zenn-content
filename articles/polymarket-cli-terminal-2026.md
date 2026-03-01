@@ -8,44 +8,72 @@ published: false
 
 ## はじめに
 
-Polymarketは世界最大の予測市場プラットフォームです。「BTCは$100Kを超えるか」「日銀は利上げするか」といったイベントの確率がリアルタイムで取引されています。
+Polymarketは世界最大の分散型予測市場プラットフォームです。Polygon上に構築されていて、「BTCは今月$100Kを超えるか」「日銀は利上げするか」「次の米大統領は誰か」といったイベントの確率が、リアルタイムで取引されています。
 
-このデータ、実はCLIからサクッと取得できます。Polymarket公式のRust製CLIツールを使えば、市場検索、オッズ確認、オーダーブック取得まで全部ターミナルで完結します。
+2024年の米大統領選では累計取引量が$3.5Bを超え、従来の世論調査より正確な予測を出したことで注目を集めました。
 
-今回は、Polymarket CLIのインストールから実際のデータ取得まで触ってみたので、その記録を残します。
+このPolymarketのデータ、ブラウザからも見れますが、Rust製の公式CLIツールを使えばターミナルからサクッと取得できます。市場検索、オッズ確認、オーダーブック取得まで全部コマンド一発です。
+
+今回はこのCLIのインストールからデータ取得まで触ってみたので、その記録を残します。
+
+:::message
+この記事ではデータ取得にフォーカスしています。CLIにはウォレット連携による取引機能もありますが、Polymarketでの取引は日本の法規制上グレーゾーンにあたるため、本記事では扱いません。データの閲覧・取得自体は公開APIを通じた情報収集であり、問題ありません。
+:::
 
 ## Polymarket CLIとは
 
-Polymarket CLIは、Polymarketの予測市場データにターミナルからアクセスできるRust製のツールです。
+Polymarket CLIは、Polymarketの予測市場にターミナルからアクセスできるRust製のツールです。
 
-主な機能は以下の通りです。
+https://github.com/polymarket/polymarket-cli
 
+主な機能をカテゴリ別に整理します。
+
+**データ取得（認証不要）**
 - 市場の検索・一覧表示
 - オッズ（価格）のリアルタイム取得
 - オーダーブック（板情報）の確認
 - 価格履歴の取得
-- ウォレット連携による取引（今回は扱いません）
+- イベント・タグ・シリーズの取得
+- コメントの閲覧
+- リーダーボードの確認
 
-GitHub: https://github.com/polymarket/polymarket-cli
+**取引（ウォレット認証が必要）**
+- 指値注文・成行注文
+- ポジション管理
+- CTF操作（split, merge, redeem）
+- ブリッジ
+
+データ取得だけならウォレット不要で、インストールしてすぐ使えます。
 
 ## インストール
 
-### Rustのインストール
+### 方法1: pre-builtバイナリ（推奨環境のみ）
 
-Polymarket CLIはRust製なので、まずRustをインストールします。
+GitHubのReleasesページからバイナリをダウンロードできます。
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-source $HOME/.cargo/env
+# Linux x86_64の場合
+curl -L https://github.com/polymarket/polymarket-cli/releases/latest/download/polymarket-linux-amd64 -o polymarket
+chmod +x polymarket
+sudo mv polymarket /usr/local/bin/
 ```
 
-### ソースからビルド
+ただし、このバイナリはGLIBC 2.38以上を要求します。Ubuntu 24.04やFedora 39以降なら問題ありませんが、Debian 12（GLIBC 2.36）やそれ以前の環境では以下のエラーが出ます。
 
-pre-builtバイナリも配布されていますが、環境によってはGLIBCのバージョン不整合で動かないことがあります（Debian 12ではGLIBC 2.36ですが、バイナリがGLIBC 2.38/2.39を要求します）。
+```
+./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
+```
 
-ソースからビルドするのが確実です。
+### 方法2: ソースからビルド（確実）
+
+GLIBC問題を回避するには、ソースからビルドします。
 
 ```bash
+# Rustのインストール（未インストールの場合）
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source $HOME/.cargo/env
+
+# ソースからビルド
 git clone https://github.com/polymarket/polymarket-cli.git
 cd polymarket-cli
 cargo build --release
@@ -61,6 +89,8 @@ polymarket --version
 ```
 polymarket 0.1.4
 ```
+
+ビルドに必要なディスク容量は約1GBです。CIやDockerで使う場合はマルチステージビルドで最終イメージを小さくするとよいでしょう。
 
 ## 市場を検索する
 
@@ -84,11 +114,16 @@ polymarket markets search "Bitcoin" --limit 5
 ╰───────────────────────────────────────────────────┴─────────────┴─────────┴───────────┴────────╯
 ```
 
-Price (Yes) がその市場の「Yes」の価格で、これがそのまま確率を表しています。0.05¢ = ほぼ0%、50¢ = 50%です。
+各カラムの意味は以下の通りです。
+
+- **Price (Yes)**: Yes側のオッズ。これがそのまま市場が予測する確率を表します。50¢ = 50%、99¢ = 99%
+- **Volume**: 累計取引量（USDC建て）。市場の注目度の指標
+- **Liquidity**: 現在の流動性。高いほど大きなサイズの注文が通りやすい
+- **Status**: Active（取引中）/ Closed（終了）
 
 ### JSON出力
 
-`-o json` をつけるとJSON形式で出力されます。スクリプトに組み込む時に便利です。
+`-o json` をつけるとJSON形式で出力されます。プログラムから扱う場合に便利です。
 
 ```bash
 polymarket markets search "Bank of Japan" --limit 1 -o json
@@ -99,10 +134,11 @@ polymarket markets search "Bank of Japan" --limit 1 -o json
   {
     "id": "1227992",
     "question": "Nothing Ever Happens: Interest Rates",
-    "conditionId": "0xa1c7afb51...",
+    "conditionId": "0xa1c7afb51e4a...",
     "slug": "nothing-ever-happens-interest-rates",
     "endDate": "2026-03-20T00:00:00Z",
     "liquidity": "5864.88",
+    "outcomes": "[\"Yes\",\"No\"]",
     "outcomePrices": "[\"0.925\",\"0.075\"]",
     "volume": "42958.01",
     "active": true
@@ -110,13 +146,26 @@ polymarket markets search "Bank of Japan" --limit 1 -o json
 ]
 ```
 
+`outcomePrices` がオッズです。`[0.925, 0.075]` は Yes: 92.5%, No: 7.5% を意味します。
+
+### 市場の一覧
+
+検索以外に、条件を指定して市場を一覧取得することもできます。
+
+```bash
+# アクティブな市場を流動性順で取得
+polymarket markets list --active --limit 10
+```
+
 ## オーダーブック（板情報）を見る
 
-CLOB（Central Limit Order Book）のデータにもアクセスできます。
+Polymarketの裏側にはCLOB（Central Limit Order Book）があります。株式市場の板情報と同じように、各価格帯の注文状況を確認できます。
 
 ```bash
 polymarket clob book <TOKEN_ID>
 ```
+
+TOKEN_IDは市場検索のJSON出力から取得できます。各市場にはYes/Noそれぞれのトークンがあり、`clobTokenIds` フィールドに格納されています。
 
 ```
 Market: 0xbb57ccf5...
@@ -134,74 +183,96 @@ Bids:
 ╰───────┴───────────╯
 ```
 
-TOKEN_IDは市場検索のJSON出力から取得できます。`clobTokenIds`フィールドの値です。
+Sizeの単位はシェア数です。Bids（買い注文）とAsks（売り注文）がそれぞれ表示されます。
 
-## 価格履歴の取得
+板が厚い（Sizeが大きい）価格帯は、多くのトレーダーがその価格が妥当だと考えていることを示します。逆に板が薄い価格帯をまたぐような動きがあれば、市場の見方が大きく変わったサインです。
+
+## その他のデータ取得コマンド
+
+### 価格関連
 
 ```bash
+# 現在の価格（ミッドポイント）
+polymarket clob midpoint <TOKEN_ID>
+
+# Bid-Askスプレッド
+polymarket clob spread <TOKEN_ID>
+
+# 直近の取引価格
+polymarket clob last-trade <TOKEN_ID>
+
+# 価格履歴（期間: 1m, 1h, 6h, 1d, 1w, max）
 polymarket clob price-history <TOKEN_ID> --interval 1d --fidelity 7
 ```
 
-`--interval` で期間（1m, 1h, 6h, 1d, 1w, max）、`--fidelity` でデータポイント数を指定できます。
+### イベント・タグ
 
-## Pythonスクリプトと組み合わせる
+```bash
+# イベント単位で取得（1つのイベントに複数市場が紐づく）
+polymarket events list --limit 5
 
-CLIのJSON出力をPythonで処理すれば、オッズの変動監視ができます。
-
-簡単な例として、市場のオッズを定期的に取得して変動を検知するスクリプトを書いてみました。
-
-```python
-import subprocess
-import json
-
-def search_markets(query, limit=5):
-    result = subprocess.run(
-        ["polymarket", "markets", "search", query,
-         "--limit", str(limit), "-o", "json"],
-        capture_output=True, text=True, timeout=15
-    )
-    return json.loads(result.stdout)
-
-markets = search_markets("Bitcoin", limit=3)
-for m in markets:
-    prices = json.loads(m["outcomePrices"])
-    yes_price = float(prices[0]) * 100
-    print(f"{m['question']}: {yes_price:.1f}%")
+# タグ一覧
+polymarket tags list
 ```
 
-```
-Will Bitcoin reach $150,000 in February?: 0.1%
-Will Bitcoin reach $120,000 in February?: 0.1%
-Will Bitcoin reach $125,000 in February?: 0.1%
+### リーダーボード
+
+```bash
+# トップトレーダーのランキング
+polymarket data leaderboard
 ```
 
-これをcronやAIエージェントのHEARTBEATに組み込めば、予測市場のオッズ変動を自動で監視できます。
+## ユースケース
+
+CLIでデータを取得できると、様々な活用ができます。
+
+### 1. オッズ変動の監視
+
+定期的にオッズを取得して、前回との差分が閾値を超えたらアラートを出す仕組みが作れます。予測市場のオッズが急変動する時は、何か大きなニュースが出たサインです。ニュースサイトより先にシグナルを掴める可能性があります。
+
+### 2. 投資判断の補助データ
+
+「トランプ関税発動確率が急上昇」→ 関連銘柄のポジション調整、「Fed利下げ確率が上昇」→ テック株への影響を検討、といった使い方ができます。予測市場のオッズは多くのトレーダーの合意価格なので、単一のアナリストの予測より信頼性が高いケースもあります。
+
+### 3. AIエージェントとの連携
+
+CLIはAIエージェントと非常に相性が良いです。ブラウザ操作やAPI認証の設定が不要で、コマンド1つでデータが取れるため、エージェントのツールとして簡単に組み込めます。
+
+例えば「日銀の利上げ確率が5%以上変動したら通知」「BTCの予測市場と実際の価格の乖離を検知」といった自律的な監視をエージェントに任せることができます。
+
+### 4. データ分析・可視化
+
+JSON出力をPythonやRのスクリプトに渡して、オッズの推移グラフを作ったり、複数市場の相関分析を行ったりできます。学術研究やレポート作成にも使えます。
 
 ## ハマりどころ
 
-### GLIBC互換性
+### GLIBC互換性（再掲）
 
-pre-builtバイナリはGLIBC 2.38以上を要求します。Debian 12（bookworm）のGLIBCは2.36なので、ソースビルドが必要でした。
+前述の通り、pre-builtバイナリはGLIBC 2.38以上が必要です。VPSやCI環境ではOSのバージョンに注意してください。ソースビルドで回避できます。
 
-```
-./polymarket: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.38' not found
-```
+### 市場のslugとconditionIdとtokenId
 
-この場合は前述の通り `cargo build --release` でビルドすれば解決します。
+Polymarketには市場を識別するIDが複数あります。
 
-### データ取得は無料、取引にはウォレット設定が必要
+- **slug**: URLに使われる人間が読める識別子（例: `nothing-ever-happens-interest-rates`）
+- **conditionId**: 市場のコントラクト上の識別子（0xから始まるハッシュ）
+- **tokenId**: Yes/Noそれぞれのトークンの識別子（長い数値文字列）
 
-市場データの取得（search, list, book等）にはウォレット不要です。Polymarket APIは公開されているので、認証なしでデータを取れます。
+CLIのコマンドによって必要なIDが異なります。`markets` 系コマンドはslugやconditionIdを使い、`clob` 系コマンドはtokenIdを使います。JSON出力で各IDを確認できるので、最初にJSON形式で市場情報を取得しておくとスムーズです。
 
-取引する場合はウォレットの設定とUSDC.eの準備が必要ですが、データソースとして使うだけならインストールしてすぐ使えます。
+### レート制限
+
+Polymarket APIには明示的なレート制限は公開されていませんが、短時間に大量のリクエストを送ると429エラーが返ることがあります。スクリプトで定期実行する場合は適度な間隔（数秒〜数分）を空けるようにしましょう。
 
 ## まとめ
 
 Polymarket CLIを使えば、予測市場のデータをターミナルからサクッと取得できます。
 
-- 市場検索、オッズ確認、オーダーブック取得が全部コマンド一発
-- JSON出力でスクリプトに組み込みやすい
-- AIエージェントとの相性が良い（CLI = AIが一番扱いやすいインターフェース）
-- データ取得だけなら無料、ウォレット不要
+- **インストール**: Rustソースビルドが確実。GLIBC問題に注意
+- **データ取得**: 市場検索、オッズ、オーダーブック、価格履歴がコマンド一発
+- **出力形式**: テーブルとJSONを切り替えられ、スクリプトとの連携が容易
+- **ウォレット不要**: データ取得だけなら認証なしで使える
 
-予測市場のオッズは「集合知による確率予測」です。ニュースの先行指標として使ったり、株やクリプトの投資判断の参考にしたり、賭けなくてもデータソースとしての価値があります。
+予測市場のオッズは「世界中のトレーダーによるリアルタイムの確率予測」です。賭けなくても、データソースとして十分な価値があります。
+
+次回はこのCLIとPythonを組み合わせて、オッズ変動の自動監視スクリプトを作ってみたいと思います。
