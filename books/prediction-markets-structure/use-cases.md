@@ -39,6 +39,9 @@ title: "第10章 ユースケース"
 金銭を直接賭けるんじゃなくて、参加型の予想、ポイント報酬、メディア企画、世論の可視化といった形にすることで、予測市場的な価値を一部取り出すことができます。賭博規制を回避しつつ、集合知のメカニズムだけを借りるアプローチですね。
 
 :::message
-予測市場の実際の市場一覧: https://kalshi.com/markets
-Iowa Electronic Markets（歴史的な研究市場）: https://iem.uiowa.edu/
+予測市場の実際の市場一覧
+https://kalshi.com/markets
+
+Iowa Electronic Markets（歴史的な研究市場）
+https://iem.uiowa.edu/
 :::

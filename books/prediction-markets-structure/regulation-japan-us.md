@@ -54,7 +54,13 @@ CFTC（[商品先物取引委員会](https://www.cftc.gov/IndustryOversight/Cont
 
 :::message
 規制動向の参考:
-- CFTC Event Contracts Rule撤回: https://www.cftc.gov/PressRoom/PressReleases/9179-26
-- CFTC Prediction Markets Advisory: https://www.cftc.gov/PressRoom/PressReleases/9185-26
-- 西村あさひ法律事務所 スポーツベッティング解説: https://www.nishimura.com/ja/knowledge/newsletters/sports_business_law_240513
+
+CFTC Event Contracts Rule撤回
+https://www.cftc.gov/PressRoom/PressReleases/9179-26
+
+CFTC Prediction Markets Advisory
+https://www.cftc.gov/PressRoom/PressReleases/9185-26
+
+西村あさひ法律事務所 スポーツベッティング解説
+https://www.nishimura.com/ja/knowledge/newsletters/sports_business_law_240513
 :::

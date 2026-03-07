@@ -57,5 +57,6 @@ https://www.reuters.com/world/middle-east/kalshi-sued-over-ouster-iran-leader-pr
 :::
 
 :::message
-CFTCは2026年2月に予測市場に対するAdvisoryを発表し（https://www.cftc.gov/PressRoom/PressReleases/9185-26）、インサイダー取引を含む不正行為への取り締まり姿勢を明確にしています。
+CFTCは2026年2月に予測市場に対するAdvisoryを発表し、インサイダー取引を含む不正行為への取り締まり姿勢を明確にしています。
+https://www.cftc.gov/PressRoom/PressReleases/9185-26
 :::
