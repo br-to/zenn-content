@@ -12,7 +12,9 @@ title: "第8章 規制動向──CFTCと日本の法的位置づけ"
 
 Kalshi のような存在を理解するには、CFTC を避けて通れません。
 
-CFTC（[商品先物取引委員会](https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm)）は、予測市場を放置された賭けじゃなくて、監督対象になりうる市場として扱っています。イベント契約を商品先物の一種として規制することで、予測市場に一定の正統性を与えているわけです。
+CFTC（商品先物取引委員会）は、予測市場を放置された賭けじゃなくて、監督対象になりうる市場として扱っています。
+https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm
+イベント契約を商品先物の一種として規制することで、予測市場に一定の正統性を与えているわけです。
 
 ただしCFTCの管轄下に入るということは、扱えるテーマや市場設計にも制約が生まれるということでもあります。
 

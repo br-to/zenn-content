@@ -19,19 +19,23 @@ graph LR
 
 # Iowa Electronic Markets
 
-代表的な初期事例が [Iowa Electronic Markets](https://iem.uiowa.edu/) です。
+代表的な初期事例が Iowa Electronic Markets です。
+https://iem.uiowa.edu/
 
 IEM は、選挙や経済指標などを対象とした少額の研究・教育目的の市場として知られています。「実際に資金を伴う予測市場を継続運営して、その精度を観察した」という意味で非常に重要な存在でした。
 
 # PredictIt のような研究目的市場
 
-その後、[PredictIt](https://www.predictit.org/support/what-is-predictit) のように研究や限定的な制度的枠組みの中で運営される政治予測市場が登場します。これらは今日の本格的な商業予測市場に比べると規模も制約も大きいですが、予測市場の社会実装に向けた橋渡し役を果たしました。
+その後、PredictIt のように研究や限定的な制度的枠組みの中で運営される政治予測市場が登場します。
+https://www.predictit.org/support/what-is-predictit
+これらは今日の本格的な商業予測市場に比べると規模も制約も大きいですが、予測市場の社会実装に向けた橋渡し役を果たしました。
 
 # Robin Hanson と市場設計
 
 予測市場の歴史を語るうえで、Robin Hanson を外すことはできません。
 
-Hanson は予測市場を単なるベット市場じゃなくて、情報集約制度として深く理論化しました。特に [market scoring rule](https://mason.gmu.edu/~rhanson/mktscore.pdf) や futarchy に関する議論は、「どのように設計されれば、少ない流動性でも情報をうまく吸い上げられるか」という点に大きな影響を与えたんです。
+Hanson は予測市場を単なるベット市場じゃなくて、情報集約制度として深く理論化しました。特に market scoring rule や futarchy に関する議論は、「どのように設計されれば、少ない流動性でも情報をうまく吸い上げられるか」という点に大きな影響を与えたんです。
+https://mason.gmu.edu/~rhanson/mktscore.pdf
 
 # ブロックチェーン時代の転換
 
