@@ -61,7 +61,7 @@ https://fee.org/articles/the-use-of-knowledge-in-society/
 「予測市場の価格 = 真の確率」ではありません。流動性や参加者の偏りによって簡単に歪むため、価格の読み方には注意が必要です。
 :::
 
-より深く知りたい方へ:
+より深く知りたい方へ
 
 Robin Hanson - Logarithmic Market Scoring Rules
 https://mason.gmu.edu/~rhanson/mktscore.pdf

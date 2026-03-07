@@ -58,7 +58,7 @@ CFTC監督下なのか、グレーゾーンなのか、規制外なのか。
 
 この観点で整理すると、同じ「予測市場」でも構造がかなり違うことがわかります。
 
-各プレイヤーの詳細:
+各プレイヤーの詳細
 
 Polymarket Documentation
 https://docs.polymarket.com/
