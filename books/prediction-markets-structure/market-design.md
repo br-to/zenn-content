@@ -40,7 +40,5 @@ https://mason.gmu.edu/~rhanson/mktscore.pdf
 
 「価格が出ている」ことと「その価格に意味がある」ことは別なんですよね。設計がどれだけ優れていても、流動性が足りなければ価格は信頼できるシグナルにならない。
 
-:::message
 Polymarketの注文板の仕組み
 https://docs.polymarket.com/concepts/prices-orderbook
-:::

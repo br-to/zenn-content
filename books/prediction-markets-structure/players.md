@@ -58,7 +58,6 @@ CFTC監督下なのか、グレーゾーンなのか、規制外なのか。
 
 この観点で整理すると、同じ「予測市場」でも構造がかなり違うことがわかります。
 
-:::message
 各プレイヤーの詳細:
 
 Polymarket Documentation
@@ -69,4 +68,3 @@ https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated
 
 PredictIt
 https://www.predictit.org/support/what-is-predictit
-:::

@@ -20,11 +20,9 @@ title: "第2章 なぜ市場は未来を当てるのか"
 
 つまり予測市場は「みんなの意見を平均する仕組み」じゃなくて、「分散した知識を取引によって圧縮する仕組み」だと理解した方が本質に近いと思います。
 
-:::message
 ハイエクの原論文「The Use of Knowledge in Society」
 https://fee.org/articles/the-use-of-knowledge-in-society/
 1945年の論文ですが、予測市場の理論的支柱として今も引用されます。
-:::
 
 # 効率的市場仮説との関係
 
@@ -63,7 +61,6 @@ https://fee.org/articles/the-use-of-knowledge-in-society/
 「予測市場の価格 = 真の確率」ではありません。流動性や参加者の偏りによって簡単に歪むため、価格の読み方には注意が必要です。
 :::
 
-:::message
 より深く知りたい方へ:
 
 Robin Hanson - Logarithmic Market Scoring Rules
@@ -71,4 +68,3 @@ https://mason.gmu.edu/~rhanson/mktscore.pdf
 
 NBER - Prediction Markets and the Wisdom of Crowds
 https://www.nber.org/papers/w18222
-:::

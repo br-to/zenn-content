@@ -64,7 +64,6 @@ Polymarket が開発者にとって面白いのは、予測市場がデータソ
 
 価格、出来高、約定、オッズ変化、マーケット一覧など、予測市場の情報はそのままアプリケーションの入力になります。この公開されたデータを使って、オッズ変動を監視したり、複数市場の相関を分析したりできるわけです。
 
-:::message
 Polymarketの技術詳細:
 
 Trading Overview
@@ -78,4 +77,3 @@ https://docs.polymarket.com/developers/CLOB/introduction
 
 Prices & Orderbook
 https://docs.polymarket.com/concepts/prices-orderbook
-:::

@@ -54,7 +54,6 @@ https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm
 日本国内でのreal-money型予測市場の運営・利用は、賭博規制や金融商品取引法に抵触する可能性があります。詳細は専門家にご確認ください。
 :::
 
-:::message
 規制動向の参考:
 
 CFTC Event Contracts Rule撤回
@@ -65,4 +64,3 @@ https://www.cftc.gov/PressRoom/PressReleases/9185-26
 
 西村あさひ法律事務所 スポーツベッティング解説
 https://www.nishimura.com/ja/knowledge/newsletters/sports_business_law_240513
-:::
