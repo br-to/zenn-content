@@ -9,14 +9,12 @@ title: "第3章 予測市場の歴史"
 予測市場は最初から巨大な商業サービスとして生まれたわけじゃありません。むしろ「市場メカニズムを使えば、未来に関する情報をうまく集約できるのではないか」という知的関心から始まって、学術実験、研究目的の制度、限定的な商用展開を経て、ようやく今の形にたどり着いたわけです。
 
 ```mermaid
-timeline
-    title 予測市場の歴史
-    1988 : Iowa Electronic Markets<br/>学術・研究目的
-    2014 : PredictIt<br/>限定的な政治予測市場
-    2015 : Robin Hanson<br/>LMSR・futarchy理論
-    2020 : Polymarket<br/>オンチェーン予測市場
-    2021 : Kalshi<br/>CFTC規制下の予測市場
-    2025 : 大統領選で注目<br/>主流メディアが価格を参照
+graph LR
+    A[1988<br/>Iowa Electronic Markets] --> B[2014<br/>PredictIt]
+    B --> C[2015<br/>Robin Hanson<br/>LMSR・futarchy]
+    C --> D[2020<br/>Polymarket]
+    D --> E[2021<br/>Kalshi]
+    E --> F[2025<br/>主流メディアが<br/>価格を参照]
 ```
 
 # Iowa Electronic Markets
