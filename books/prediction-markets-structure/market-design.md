@@ -8,6 +8,13 @@ title: "第5章 市場設計"
 
 同じイベントでも、市場の作り方次第で価格の質は大きく変わります。
 
+```mermaid
+graph TD
+    A[CLOB<br/>Central Limit Order Book] -->|買い板 / 売り板| B[価格が明示的]
+    C[AMM<br/>Automated Market Maker] -->|数式で自動価格| D[初期流動性を確保しやすい]
+    E[LMSR<br/>Market Scoring Rule] -->|少ない流動性でも機能| F[学術市場に最適]
+```
+
 # CLOB
 
 CLOB は Central Limit Order Book の略で、買い注文と売り注文を板に並べて、価格と数量に応じてマッチングさせる方式です。
