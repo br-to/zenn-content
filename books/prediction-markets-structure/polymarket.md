@@ -66,8 +66,8 @@ Polymarket が開発者にとって面白いのは、予測市場がデータソ
 
 :::message
 Polymarketの技術詳細:
-- [Trading Overview](https://docs.polymarket.com/trading/overview)
-- [CTF Overview](https://docs.polymarket.com/trading/ctf/overview)
-- [CLOB Introduction](https://docs.polymarket.com/developers/CLOB/introduction)
-- [Prices & Orderbook](https://docs.polymarket.com/concepts/prices-orderbook)
+- Trading Overview: https://docs.polymarket.com/trading/overview
+- CTF Overview: https://docs.polymarket.com/trading/ctf/overview
+- CLOB Introduction: https://docs.polymarket.com/developers/CLOB/introduction
+- Prices & Orderbook: https://docs.polymarket.com/concepts/prices-orderbook
 :::

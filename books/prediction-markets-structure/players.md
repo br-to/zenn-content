@@ -60,7 +60,7 @@ CFTC監督下なのか、グレーゾーンなのか、規制外なのか。
 
 :::message
 各プレイヤーの詳細:
-- [Polymarket Documentation](https://docs.polymarket.com/)
-- [Kalshi Regulation FAQ](https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated)
-- [PredictIt: What is PredictIt?](https://www.predictit.org/support/what-is-predictit)
+- Polymarket Documentation: https://docs.polymarket.com/
+- Kalshi Regulation FAQ: https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated
+- PredictIt: What is PredictIt?: https://www.predictit.org/support/what-is-predictit
 :::

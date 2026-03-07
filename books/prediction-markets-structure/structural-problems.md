@@ -52,9 +52,10 @@ graph TD
 情報価値があるからといって、すべてを市場化していいわけじゃない。でも逆に「不謹慎だから禁止」だけで片づけると、予測市場の可能性そのものが狭まってしまう。このバランスは難しいと思います。
 
 :::message alert
-2026年3月時点で、Kalshiはイラン最高指導者に関する予測市場を巡って[訴訟を受けています](https://www.reuters.com/world/middle-east/kalshi-sued-over-ouster-iran-leader-prediction-market-2026-03-06/)。倫理問題は理論上の議論ではなく、現在進行形の課題です。
+2026年3月時点で、Kalshiはイラン最高指導者に関する予測市場を巡って訴訟を受けています。倫理問題は理論上の議論ではなく、現在進行形の課題です。
+https://www.reuters.com/world/middle-east/kalshi-sued-over-ouster-iran-leader-prediction-market-2026-03-06/
 :::
 
 :::message
-CFTCは2026年2月に[予測市場に対するAdvisory](https://www.cftc.gov/PressRoom/PressReleases/9185-26)を発表し、インサイダー取引を含む不正行為への取り締まり姿勢を明確にしています。
+CFTCは2026年2月に予測市場に対するAdvisoryを発表し（https://www.cftc.gov/PressRoom/PressReleases/9185-26）、インサイダー取引を含む不正行為への取り締まり姿勢を明確にしています。
 :::
