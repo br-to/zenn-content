@@ -48,27 +48,20 @@ graph LR
 
 将来のイベントに対して契約が発行されて、その契約が売買されて、満期時の結果に応じて決済される。この点では先物やオプションなどのデリバティブと発想が重なります。
 
-実際、Kalshi のようなサービスはイベント契約を商品先物規制の文脈で扱っています。つまり予測市場は「未来について賭ける場」であると同時に、「イベントに連動するデリバティブ市場」としても理解できるわけです。
+実際、[Kalshi](https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated) のようなサービスはイベント契約を[商品先物規制](https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm)の文脈で扱っています。つまり予測市場は「未来について賭ける場」であると同時に、「イベントに連動するデリバティブ市場」としても理解できるわけです。
 
 # 本書で扱う予測市場
 
 この本で主に扱うのは、次の2系統です。
 
 **規制市場型の予測市場**  
-例として Kalshi
+例として [Kalshi](https://kalshi.com/)
 
 **オンチェーン型の予測市場**  
-例として Polymarket
+例として [Polymarket](https://polymarket.com/)
 
 前者は制度と監督を信頼の土台にして、後者はコードと透明性を信頼の土台にします。
 
 この違いは単なる実装差じゃありません。予測市場という仕組みを制度で支えるのか、オープンなインフラで支えるのかという思想の違いでもあります。
 
 この本では、この違いも含めて予測市場の構造を整理していきます。
-
-## 参考URL
-
-- CFTC Contracts & Products / Event Contracts  
-  https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm
-- How is Kalshi regulated?  
-  https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated

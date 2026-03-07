@@ -64,15 +64,10 @@ Polymarket が開発者にとって面白いのは、予測市場がデータソ
 
 価格、出来高、約定、オッズ変化、マーケット一覧など、予測市場の情報はそのままアプリケーションの入力になります。この公開されたデータを使って、オッズ変動を監視したり、複数市場の相関を分析したりできるわけです。
 
-## 参考URL
-
-- Polymarket Documentation  
-  https://docs.polymarket.com/
-- Polymarket Trading Overview  
-  https://docs.polymarket.com/trading/overview
-- Conditional Token Framework overview  
-  https://docs.polymarket.com/trading/ctf/overview
-- Prices & Orderbook  
-  https://docs.polymarket.com/concepts/prices-orderbook
-- Contract addresses  
-  https://docs.polymarket.com/developers/CLOB/introduction
+:::message
+Polymarketの技術詳細:
+- [Trading Overview](https://docs.polymarket.com/trading/overview)
+- [CTF Overview](https://docs.polymarket.com/trading/ctf/overview)
+- [CLOB Introduction](https://docs.polymarket.com/developers/CLOB/introduction)
+- [Prices & Orderbook](https://docs.polymarket.com/concepts/prices-orderbook)
+:::
