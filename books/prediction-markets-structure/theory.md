@@ -64,7 +64,9 @@ https://fee.org/articles/the-use-of-knowledge-in-society/
 より深く知りたい方へ
 
 Robin Hanson - Logarithmic Market Scoring Rules
+予測市場の自動マーケットメイカー（AMM）の理論的基盤となった論文。少ない参加者でも市場を成立させる仕組みを提案しています。
 https://mason.gmu.edu/~rhanson/mktscore.pdf
 
 NBER - Prediction Markets and the Wisdom of Crowds
+予測市場がなぜ正確な予測を出せるのか、その条件と限界を実証的に分析した論文。
 https://www.nber.org/papers/w18222
