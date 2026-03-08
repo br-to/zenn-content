@@ -67,4 +67,3 @@ Kalshi Regulation FAQ
 https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated
 
 PredictIt
-https://www.predictit.org/
