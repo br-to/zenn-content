@@ -68,11 +68,11 @@ https://help.kalshi.com/en/articles/13823765-how-is-kalshi-regulated
 この本で主に扱うのは、次の2系統です。
 
 **規制市場型の予測市場**  
-例として Kalshi
+Kalshi
 https://kalshi.com/
 
 **オンチェーン型の予測市場**  
-例として Polymarket
+Polymarket
 https://polymarket.com/
 
 前者は制度と監督を信頼の土台にして、後者はコードと透明性を信頼の土台にします。
