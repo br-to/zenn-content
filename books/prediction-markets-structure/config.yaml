@@ -1,7 +1,7 @@
 title: "予測市場の構造──集合知・市場設計・規制で理解する未来予測"
 summary: "予測市場を、単なる賭けサービスではなく、情報を価格に変換する制度として読み解く本です。集合知、効率的市場仮説、ハイエク的な価格観から始めて、CLOBや条件付きトークンなどの技術構造、PolymarketとKalshiの違い、CFTCや日本法との関係、インサイダー問題や構造的な課題までを整理します。"
 topics: ["予測市場", "ブロックチェーン", "金融", "polymarket", "kalshi"]
-published: false
+published: true
 price: 0
 toc_depth: 2
 chapters:
