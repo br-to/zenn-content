@@ -41,5 +41,3 @@ title: "第10章 ユースケース"
 予測市場の実際の市場一覧
 https://kalshi.com/markets
 
-Iowa Electronic Markets（歴史的な研究市場）
-https://iem.uiowa.edu/

@@ -48,8 +48,4 @@ https://www.reuters.com/world/middle-east/kalshi-sued-over-ouster-iran-leader-pr
 解決条件の曖昧さは予測市場の最大のリスク要因の一つです。ポジションを取る前に、必ず解決条件を確認することをおすすめします。
 :::
 
-Polymarketの注文板の仕組み
-https://docs.polymarket.com/concepts/prices-orderbook
 
-基本的な使い方
-https://docs.polymarket.com/polymarket-101

@@ -10,11 +10,11 @@ title: "第3章 予測市場の歴史"
 
 ```mermaid
 graph LR
-    A[1988<br/>Iowa Electronic Markets] --> B[2014<br/>PredictIt]
-    B --> C[2015<br/>Robin Hanson<br/>LMSR・futarchy]
+    A[1988<br/>Iowa Electronic Markets] --> B[2003<br/>Robin Hanson<br/>LMSR論文]
+    B --> C[2014<br/>PredictIt]
     C --> D[2020<br/>Polymarket]
     D --> E[2021<br/>Kalshi]
-    E --> F[2025<br/>主流メディアが<br/>価格を参照]
+    E --> F[2024<br/>主流メディアが<br/>価格を参照]
 ```
 
 # Iowa Electronic Markets
@@ -48,9 +48,9 @@ https://mason.gmu.edu/~rhanson/mktscore.pdf
 
 Kalshi はオンチェーンじゃなくて、規制市場として予測市場を制度の中に位置づけようとしました。これによって予測市場は、「暗号資産まわりの実験」ではなく「金融市場の一類型」として正面から制度と向き合うことになります。
 
-# 2025年以降の局面
+# 2024年以降の局面
 
-2025年以降、予測市場は明らかに新しい段階に入りました。
+2024年以降、予測市場は明らかに新しい段階に入りました。
 
 大統領選、利下げ、地政学、スポーツなど社会的関心の高いテーマで、予測市場の価格がメディアやSNSで頻繁に参照されるようになって、制度との衝突も可視化されています。
 
