@@ -64,5 +64,3 @@ https://www.cftc.gov/PressRoom/PressReleases/9179-26
 CFTC Prediction Markets Advisory
 https://www.cftc.gov/PressRoom/PressReleases/9185-26
 
-西村あさひ法律事務所 スポーツベッティング解説
-https://www.nishimura.com/ja/knowledge/newsletters/sports_business_law_240513
