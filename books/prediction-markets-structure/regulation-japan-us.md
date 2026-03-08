@@ -61,6 +61,6 @@ https://www.cftc.gov/IndustryOversight/ContractsProducts/index.htm
 CFTC Event Contracts Rule撤回
 https://www.cftc.gov/PressRoom/PressReleases/9179-26
 
-CFTC Prediction Markets Advisory
+CFTC 予測市場に関する勧告（Prediction Markets Advisory）
 https://www.cftc.gov/PressRoom/PressReleases/9185-26
 
