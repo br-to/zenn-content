@@ -10,7 +10,7 @@ free: true
 もっと平たく言うと、「ある出来事が起こると思う人」と「起こらないと思う人」が売買を行って、その需給によって確率のように読める価格が形成される市場です。
 
 ![Polymarketのトップページ。地政学、政治、暗号通貨など様々なカテゴリの市場が並ぶ](/images/prediction-markets-structure/polymarket-top.jpg)
-*Polymarketのトップページ*
+*Polymarketのトップページ（2026年3月時点）*
 
 ```mermaid
 graph LR
